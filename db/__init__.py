@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db.models import Base, Server,RoomCode
+from db.models import Base, Server, RoomCode
 
 
-class Db():
+class Db:
 
     def __init__(self):
         self.__setup()
