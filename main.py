@@ -1,34 +1,19 @@
 import dotenv
 import os
-from db import Db, Server
+import db
+from db import Db, Config
 from discord.ext.commands import Bot
 
 dotenv.load_dotenv()
+db.startup()
 session = Db().session
 
 
 def get_prefix(bot, message):
-	prefix = Server.get_prefix(session, message.guild.id)
-	return prefix
+	return Config.get(session, 'prefix').value
 
 
 bot = Bot(command_prefix=get_prefix)
-
-
-@bot.command()
-async def load(ctx, extension):
-	bot.load_extension(f'cogs.{extension}')
-
-
-@bot.command()
-async def reload(ctx, extension):
-	bot.reload_extension(f'cogs.{extension}')
-
-
-@bot.command()
-async def unload(ctx, extension):
-	bot.unload_extension(f'cogs.{extension}')
-
 
 for file in os.listdir('./cogs'):
 	if file.endswith('.py'):

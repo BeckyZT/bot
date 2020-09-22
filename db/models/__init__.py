@@ -1,3 +1,3 @@
 from .base import Base
-from .server import Server
+from .config import Config
 from .room_code import RoomCode

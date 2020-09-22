@@ -5,15 +5,25 @@ from .base import Base
 
 class RoomCode(Base):
 	__tablename__ = 'room_code'
-	server_id = Column(BigInteger, ForeignKey('server.id', ondelete='CASCADE'), primary_key=True)
-
+	room_id = Column(BigInteger, primary_key=True,autoincrement=True)
 	code = Column(String)
 
 	@classmethod
-	def get_code(cls, session, server_id):
-		return session.query(cls).filter_by(server_id=server_id).first()
+	def add_code(cls,session,room_id,code):
+		room_code = RoomCode(room_id=room_id,code=code)
+		session.add(room_code)
+		session.commit()
 
 	@classmethod
-	def update_code_by_server_id(cls, session, server_id, code):
-		session.query(cls).filter_by(server_id=server_id).update({cls.code: code})
+	def get_code(cls, session, room_id):
+		return session.query(cls).filter(cls.room_id == room_id).scalar()
+
+	@classmethod
+	def update_code(cls, session, room_id, code):
+		session.query(cls).filter(cls.room_id == room_id).update({cls.code: code})
+		session.commit()
+
+	@classmethod
+	def delete(cls, session, room_code):
+		session.delete(room_code)
 		session.commit()
