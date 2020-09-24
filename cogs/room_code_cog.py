@@ -1,6 +1,7 @@
 from discord.ext import commands
 
-from db import Db, RoomCode
+from db import Db
+from db.models import RoomCode
 
 
 class RoomCodeCog(commands.Cog, name='Room Code'):

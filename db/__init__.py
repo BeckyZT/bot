@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db.models import Base, Config, RoomCode
+from db.models import Base, Config as __Config
 
 
 class Db:
@@ -22,9 +22,9 @@ def startup():
     Base.metadata.create_all(__engine)
     session = sessionmaker(bind=__engine)()
 
-    current_values = [c.key for c in Config.get(session)]
+    current_values = [c.key for c in __Config.get(session)]
     default = {'prefix': '.'}
     for key in list(default.keys()):
         if key not in current_values:
-            session.add(Config(key=key, value=default[key]))
+            session.add(__Config(key=key, value=default[key]))
     session.commit()

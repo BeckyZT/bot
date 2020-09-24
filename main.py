@@ -1,8 +1,10 @@
 import dotenv
 import os
 import db
-from db import Db, Config
+from db import Db
+from db.models import Config
 from discord.ext.commands import Bot
+
 
 dotenv.load_dotenv()
 db.startup()
