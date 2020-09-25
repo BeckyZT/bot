@@ -5,7 +5,7 @@ from db import Db
 from db.models import Config
 from discord.ext.commands import Bot
 
-from kee_alive import keep_alive
+from keep_alive import keep_alive
 
 dotenv.load_dotenv()
 db.startup()
