@@ -1,5 +1,6 @@
 from typing import Union
 
+import discord
 from discord import TextChannel, PartialEmoji, Role
 from discord.ext import commands
 from discord.ext.commands import Greedy
@@ -49,6 +50,7 @@ class GuildUtilsCog(commands.Cog, name='Guild Utils'):
 				self.session.delete(rr)
 			self.session.commit()
 
+	@commands.has_permissions(administrator=True)
 	@commands.command()
 	async def react(self, ctx, channel: TextChannel, message_id, args: Greedy[Union[PartialEmoji, Role]]):
 		message = await channel.fetch_message(message_id)
@@ -83,6 +85,7 @@ class GuildUtilsCog(commands.Cog, name='Guild Utils'):
 				self.session.commit()
 				await message.add_reaction(emoji)
 
+	@commands.has_permissions(administrator=True)
 	@commands.command()
 	async def unreact(self,ctx, channel: TextChannel, message_id,emoji: PartialEmoji=None):
 		message = await channel.fetch_message(message_id)
