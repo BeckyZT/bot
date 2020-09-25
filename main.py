@@ -29,4 +29,6 @@ async def on_ready():
 	print(f'https://discord.com/oauth2/authorize?client_id={bot.user.id}&scope=bot')
 
 keep_alive()
+
+bot.remove_command('help')
 bot.run(os.getenv("DISCORD_TOKEN"))
