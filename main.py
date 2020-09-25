@@ -5,6 +5,7 @@ from db import Db
 from db.models import Config
 from discord.ext.commands import Bot
 
+from kee_alive import keep_alive
 
 dotenv.load_dotenv()
 db.startup()
@@ -27,5 +28,5 @@ async def on_ready():
 	print('Online')
 	print(f'https://discord.com/oauth2/authorize?client_id={bot.user.id}&scope=bot')
 
-
+keep_alive()
 bot.run(os.getenv("DISCORD_TOKEN"))
