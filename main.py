@@ -3,7 +3,7 @@ import os
 import db
 from db import Db
 from db.models import Config
-from discord.ext.commands import Bot
+from discord.ext.commands import Bot, CommandNotFound
 
 from keep_alive import keep_alive
 
@@ -22,6 +22,11 @@ for file in os.listdir('./cogs'):
 	if file.endswith('.py'):
 		bot.load_extension(f'cogs.{file[:-3]}')
 
+@bot.event
+async def on_command_error(ctx, error):
+	if isinstance(error, CommandNotFound):
+		return
+	raise error
 
 @bot.event
 async def on_ready():
