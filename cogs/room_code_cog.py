@@ -1,4 +1,5 @@
 from discord.ext import commands
+from unidecode import unidecode
 
 from db import Db
 from db.models import RoomCode
@@ -12,7 +13,15 @@ class RoomCodeCog(commands.Cog, name='Room Code'):
 
 	@commands.command()
 	async def setcode(self, ctx, code,region):
-		code = code.upper()
+		code = unidecode(code.upper())
+		if not code.isalnum():
+			await ctx.send('O código deve conter apenas letras e números')
+			return
+
+		if len(code) < 4 or len(code) > 6:
+			await ctx.send("O código deve conter de 4 a 6 caracteres")
+			return
+
 		region = region.upper()
 		valid_regions = ['NA', 'AS', 'EU']
 
