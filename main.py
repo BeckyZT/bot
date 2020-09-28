@@ -1,6 +1,7 @@
 import dotenv
 import os
 import db
+from cogs import init_cogs
 from db import Db
 from db.models import Config
 from discord.ext.commands import Bot, CommandNotFound
@@ -18,9 +19,7 @@ def get_prefix(bot, message):
 
 bot = Bot(command_prefix=get_prefix)
 
-for file in os.listdir('./cogs'):
-	if file.endswith('.py'):
-		bot.load_extension(f'cogs.{file[:-3]}')
+init_cogs(bot, session)
 
 @bot.event
 async def on_command_error(ctx, error):

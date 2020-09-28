@@ -7,9 +7,9 @@ from db.models import RoomCode
 
 class RoomCodeCog(commands.Cog, name='Room Code'):
 
-	def __init__(self, bot):
+	def __init__(self, bot, session):
 		self.bot = bot
-		self.session = Db().session
+		self.session = session
 
 	@commands.command()
 	async def setcode(self, ctx, code,region):
@@ -70,7 +70,3 @@ class RoomCodeCog(commands.Cog, name='Room Code'):
 			else:
 				RoomCode.delete(self.session,room_code)
 				await ctx.send('Código redefinido')
-
-
-def setup(bot):
-	bot.add_cog(RoomCodeCog(bot))

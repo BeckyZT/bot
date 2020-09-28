@@ -1,19 +1,19 @@
 from typing import Union
 
-import discord
+
 from discord import TextChannel, PartialEmoji, Role
 from discord.ext import commands
 from discord.ext.commands import Greedy
 
-from db import Db
+
 from db.models import RoleReaction, Config
 
 
 class GuildUtilsCog(commands.Cog, name='Guild Utils'):
 
-	def __init__(self, bot):
+	def __init__(self, bot, session):
 		self.bot = bot
-		self.session = Db().session
+		self.session = session
 
 	@commands.command()
 	@commands.is_owner()
@@ -103,6 +103,3 @@ class GuildUtilsCog(commands.Cog, name='Guild Utils'):
 
 			for rr in role_reactions:
 				await message.remove_reaction(rr.emoji,self.bot.user)
-
-def setup(bot):
-	bot.add_cog(GuildUtilsCog(bot))

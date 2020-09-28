@@ -22,7 +22,3 @@ class ChatUtilsCog(commands.Cog, name='Chat Utils'):
 	@commands.command()
 	async def ping(self, ctx):
 		await ctx.send('Pong :ping_pong:')
-
-
-def setup(bot):
-	bot.add_cog(ChatUtilsCog(bot))
