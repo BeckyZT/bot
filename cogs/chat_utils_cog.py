@@ -18,6 +18,8 @@ class ChatUtilsCog(commands.Cog, name='Chat Utils'):
 		elif any([text.startswith(txt) for txt in ['oi', 'eae', 'ola']]):
 			if self.bot.user in message.mentions:
 				await message.channel.send('Oii')
+		elif "saiu da vent" in text:
+			await message.channel.send('<a:impostor:760176687278719018>')
 
 	@commands.command()
 	async def pong(self, ctx):
