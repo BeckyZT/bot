@@ -20,6 +20,8 @@ class ChatUtilsCog(commands.Cog, name='Chat Utils'):
 				await message.channel.send('Oii')
 		elif "saiu da vent" in text:
 			await message.channel.send('<a:impostor:760176687278719018>')
+		elif text == 'cu':
+			await message.channel.send('<:OPA:756367965850435664>')
 
 	@commands.command()
 	async def pong(self, ctx):
