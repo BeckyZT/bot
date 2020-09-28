@@ -9,11 +9,15 @@ class ChatUtilsCog(commands.Cog, name='Chat Utils'):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
+		if message.author==self.bot.user:
+			return
 		text = unidecode(message.content.lower())
-		distract = ['distrai', 'distraido']
 
-		if any(d for d in distract if d in text):
-			await message.channel.send('<a:distract:757381529478496346>')
+		if "distrai" in text:
+			await message.channel.send('<a:distract:760176755780223017>')
+		elif any([text.startswith(txt) for txt in ['oi', 'eae', 'ola']]):
+			if self.bot.user in message.mentions:
+				await message.channel.send('Oii')
 
 	@commands.command()
 	async def pong(self, ctx):
