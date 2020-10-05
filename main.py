@@ -1,6 +1,6 @@
+import discord as discord
 import dotenv
 import os
-import db
 from cogs import init_cogs
 from db import Db
 from db.models import Config
@@ -9,15 +9,17 @@ from discord.ext.commands import Bot, CommandNotFound
 from keep_alive import keep_alive
 
 dotenv.load_dotenv()
-db.startup()
+Db().startup()
 session = Db().session
 
 
 def get_prefix(bot, message):
 	return Config.get(session, 'prefix').value
 
+intents = discord.Intents.default()
+intents.members = True
 
-bot = Bot(command_prefix=get_prefix)
+bot = Bot(command_prefix=get_prefix,intents=intents)
 
 init_cogs(bot, session)
 

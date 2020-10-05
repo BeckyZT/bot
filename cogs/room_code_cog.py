@@ -1,7 +1,5 @@
 from discord.ext import commands
 from unidecode import unidecode
-
-from db import Db
 from db.models import RoomCode
 
 
